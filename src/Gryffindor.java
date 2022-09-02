@@ -1,4 +1,4 @@
-public class Gryffindor extends hogwarts{
+public class Gryffindor extends Hogwarts {
 
     private int nobleness;
     private int honor;
