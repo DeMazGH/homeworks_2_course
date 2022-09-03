@@ -25,6 +25,12 @@ public class Main {
                 new Ravenclaw("Marcus Belby", 43, 43, 43, 43, 43, 43)
         };
 
+        gryffindors[0].printStudentDescription(gryffindors[0]);
+        slytherins[0].printStudentDescription(slytherins[0]);
+        ravenclaws[0].printStudentDescription(ravenclaws[0]);
+        hufflepuffs[0].printStudentDescription(hufflepuffs[0]);
 
+        gryffindors[0].printStudentComparison(gryffindors[0], gryffindors[2]);
+        slytherins[0].printStudentComparison(slytherins[0], slytherins[1]);
     }
 }
