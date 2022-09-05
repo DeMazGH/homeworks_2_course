@@ -32,5 +32,10 @@ public class Main {
 
         gryffindors[0].printStudentComparison(gryffindors[0], gryffindors[2]);
         slytherins[0].printStudentComparison(slytherins[0], slytherins[1]);
+        hufflepuffs[0].printStudentComparison(hufflepuffs[0], hufflepuffs[1]);
+        ravenclaws[0].printStudentComparison(ravenclaws[0], ravenclaws[1]);
+
+        Hogwarts professor = new Hogwarts("Albus Dumbledore", 100, 100);
+        professor.printStudentComparison(gryffindors[0], slytherins[0]);
     }
 }
