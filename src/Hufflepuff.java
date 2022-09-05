@@ -23,11 +23,11 @@ public class Hufflepuff extends Hogwarts {
         int firstStudentProperties = firstStudent.industriousness + firstStudent.loyalty + firstStudent.honesty;
         int secondStudentProperties = secondStudent.industriousness + secondStudent.loyalty + secondStudent.honesty;
         if (firstStudentProperties > secondStudentProperties) {
-            System.out.println(firstStudent.getName() + " лучший Пуффендуец чем " + secondStudent.getName());
+            System.out.println(firstStudent.getFullName() + " лучший Пуффендуец чем " + secondStudent.getFullName());
         } else if (firstStudentProperties < secondStudentProperties) {
-            System.out.println(secondStudent.getName() + " лучший Пуффендуец чем " + firstStudent.getName());
+            System.out.println(secondStudent.getFullName() + " лучший Пуффендуец чем " + firstStudent.getFullName());
         } else {
-            System.out.println(secondStudent.getName() + " и " + firstStudent.getName() + " одинаково хороши");
+            System.out.println(secondStudent.getFullName() + " и " + firstStudent.getFullName() + " одинаково хороши");
         }
     }
 

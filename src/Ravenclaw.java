@@ -25,11 +25,11 @@ public class Ravenclaw extends Hogwarts {
         int firstStudentProperties = firstStudent.mind + firstStudent.wisdom + firstStudent.wit + firstStudent.creativity;
         int secondStudentProperties = secondStudent.mind + secondStudent.wisdom + secondStudent.wit + secondStudent.creativity;
         if (firstStudentProperties > secondStudentProperties) {
-            System.out.println(firstStudent.getName() + " лучший Когтевранец чем " + secondStudent.getName());
+            System.out.println(firstStudent.getFullName() + " лучший Когтевранец чем " + secondStudent.getFullName());
         } else if (firstStudentProperties < secondStudentProperties) {
-            System.out.println(secondStudent.getName() + " лучший Когтевранец чем " + firstStudent.getName());
+            System.out.println(secondStudent.getFullName() + " лучший Когтевранец чем " + firstStudent.getFullName());
         } else {
-            System.out.println(secondStudent.getName() + " и " + firstStudent.getName() + " одинаково хороши");
+            System.out.println(secondStudent.getFullName() + " и " + firstStudent.getFullName() + " одинаково хороши");
         }
     }
 

@@ -1,20 +1,36 @@
 public class Hogwarts {
 
-    private final String name;
+    private final String fullName;
     private int sorcery;
     private int transgression;
 
-    public Hogwarts(String name, int sorcery, int transgression) {
+    public Hogwarts(String fullName, int sorcery, int transgression) {
         if (sorcery < 0 || sorcery > 100 || transgression < 0 || transgression > 100) {
             throw new IllegalArgumentException("Параметры могут быть от 0 до 100");
         }
-        this.name = name;
+        this.fullName = fullName;
         this.sorcery = sorcery;
         this.transgression = transgression;
     }
 
+    public void printStudentComparison(Hogwarts firstStudent, Hogwarts secondStudent) {
+        if (firstStudent == secondStudent) {
+            System.out.println("Нельзя сравнить одного и того же студента");
+            return;
+        }
+        int firstStudentProperties = firstStudent.sorcery + firstStudent.transgression;
+        int secondStudentProperties = secondStudent.sorcery + secondStudent.transgression;
+        if (firstStudentProperties > secondStudentProperties) {
+            System.out.println(firstStudent.getFullName() + " обладает бОльшей силой магии чем " + secondStudent.getFullName());
+        } else if (firstStudentProperties < secondStudentProperties) {
+            System.out.println(secondStudent.getFullName() + " обладает бОльшей силой магии чем " + firstStudent.getFullName());
+        } else {
+            System.out.println(secondStudent.getFullName() + " и " + firstStudent.getFullName() + " одинаково хороши");
+        }
+    }
+
     public void printStudentDescription(Gryffindor gryffindorStudent) {
-        System.out.println(gryffindorStudent.getName() + " обладает качествами: ");
+        System.out.println(gryffindorStudent.getFullName() + " обладает качествами: ");
         System.out.println("Сила магии - " + gryffindorStudent.getSorcery());
         System.out.println("Расстояние трансгрессии - " + gryffindorStudent.getTransgression());
         System.out.println("Благородство - " + gryffindorStudent.getNobleness());
@@ -24,7 +40,7 @@ public class Hogwarts {
     }
 
     public void printStudentDescription(Slytherin slytherinStudent) {
-        System.out.println(slytherinStudent.getName() + " обладает качествами: ");
+        System.out.println(slytherinStudent.getFullName() + " обладает качествами: ");
         System.out.println("Сила магии - " + slytherinStudent.getSorcery());
         System.out.println("Расстояние трансгрессии - " + slytherinStudent.getTransgression());
         System.out.println("Хитрость - " + slytherinStudent.getCunning());
@@ -36,7 +52,7 @@ public class Hogwarts {
     }
 
     public void printStudentDescription(Ravenclaw ravenclawStudent) {
-        System.out.println(ravenclawStudent.getName() + " обладает качествами: ");
+        System.out.println(ravenclawStudent.getFullName() + " обладает качествами: ");
         System.out.println("Сила магии - " + ravenclawStudent.getSorcery());
         System.out.println("Расстояние трансгрессии - " + ravenclawStudent.getTransgression());
         System.out.println("Ум - " + ravenclawStudent.getMind());
@@ -47,7 +63,7 @@ public class Hogwarts {
     }
 
     public void printStudentDescription(Hufflepuff hufflepuffStudent) {
-        System.out.println(hufflepuffStudent.getName() + " обладает качествами: ");
+        System.out.println(hufflepuffStudent.getFullName() + " обладает качествами: ");
         System.out.println("Сила магии - " + hufflepuffStudent.getSorcery());
         System.out.println("Расстояние трансгрессии - " + hufflepuffStudent.getTransgression());
         System.out.println("Трудолюбие - " + hufflepuffStudent.getIndustriousness());
@@ -56,24 +72,8 @@ public class Hogwarts {
         System.out.println();
     }
 
-    public void printStudentComparison(Hogwarts firstStudent, Hogwarts secondStudent) {
-        if (firstStudent == secondStudent) {
-            System.out.println("Нельзя сравнить одного и того же студента");
-            return;
-        }
-        int firstStudentProperties = firstStudent.sorcery + firstStudent.transgression;
-        int secondStudentProperties = secondStudent.sorcery + secondStudent.transgression;
-        if (firstStudentProperties > secondStudentProperties) {
-            System.out.println(firstStudent.getName() + " обладает бОльшей силой магии чем " + secondStudent.getName());
-        } else if (firstStudentProperties < secondStudentProperties) {
-            System.out.println(secondStudent.getName() + " обладает бОльшей силой магии чем " + firstStudent.getName());
-        } else {
-            System.out.println(secondStudent.getName() + " и " + firstStudent.getName() + " одинаково хороши");
-        }
-    }
-
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
     public int getSorcery() {

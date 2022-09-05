@@ -31,11 +31,11 @@ public class Slytherin extends Hogwarts {
         int secondStudentProperties = secondStudent.cunning + secondStudent.decisiveness + secondStudent.ambitiousness +
                 secondStudent.resourcefulness + secondStudent.powerLust;
         if (firstStudentProperties > secondStudentProperties) {
-            System.out.println(firstStudent.getName() + " лучший Слизеринец чем " + secondStudent.getName());
+            System.out.println(firstStudent.getFullName() + " лучший Слизеринец чем " + secondStudent.getFullName());
         } else if (firstStudentProperties < secondStudentProperties) {
-            System.out.println(secondStudent.getName() + " лучший Слизеринец чем " + firstStudent.getName());
+            System.out.println(secondStudent.getFullName() + " лучший Слизеринец чем " + firstStudent.getFullName());
         } else {
-            System.out.println(secondStudent.getName() + " и " + firstStudent.getName() + " одинаково хороши");
+            System.out.println(secondStudent.getFullName() + " и " + firstStudent.getFullName() + " одинаково хороши");
         }
     }
 
