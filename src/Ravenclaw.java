@@ -7,10 +7,10 @@ public class Ravenclaw extends Hogwarts {
 
     public Ravenclaw(String name, int sorcery, int transgression, int mind, int wisdom, int wit, int creativity) {
         super(name, sorcery, transgression);
-        if (sorcery < 0 || sorcery > 100 || transgression < 0 || transgression > 100 || mind < 0 || mind > 100 ||
-                wisdom < 0 || wisdom > 100 || wit < 0 || wit > 100 || creativity < 0 || creativity > 100) {
-            throw new IllegalArgumentException("Параметры могут быть от 0 до 100");
-        }
+        HogwartsService.checkParametrValue("mind", mind);
+        HogwartsService.checkParametrValue("wisdom", wisdom);
+        HogwartsService.checkParametrValue("wit", wit);
+        HogwartsService.checkParametrValue("creativity", creativity);
         this.mind = mind;
         this.wisdom = wisdom;
         this.wit = wit;
@@ -18,10 +18,6 @@ public class Ravenclaw extends Hogwarts {
     }
 
     public void printStudentComparison(Ravenclaw firstStudent, Ravenclaw secondStudent) {
-        if (firstStudent == secondStudent) {
-            System.out.println("Нельзя сравнить одного и того же студента");
-            return;
-        }
         int firstStudentProperties = firstStudent.mind + firstStudent.wisdom + firstStudent.wit + firstStudent.creativity;
         int secondStudentProperties = secondStudent.mind + secondStudent.wisdom + secondStudent.wit + secondStudent.creativity;
         if (firstStudentProperties > secondStudentProperties) {
@@ -31,6 +27,17 @@ public class Ravenclaw extends Hogwarts {
         } else {
             System.out.println(secondStudent.getFullName() + " и " + firstStudent.getFullName() + " одинаково хороши");
         }
+    }
+
+    public void printStudentDescription(Ravenclaw ravenclawStudent) {
+        System.out.println(ravenclawStudent.getFullName() + " обладает качествами: ");
+        System.out.println("Сила магии - " + ravenclawStudent.getSorcery());
+        System.out.println("Расстояние трансгрессии - " + ravenclawStudent.getTransgression());
+        System.out.println("Ум - " + ravenclawStudent.getMind());
+        System.out.println("Мудрость - " + ravenclawStudent.getWisdom());
+        System.out.println("Остроумие - " + ravenclawStudent.getWit());
+        System.out.println("Творческая мошь - " + ravenclawStudent.getCreativity());
+        System.out.println();
     }
 
     public int getMind() {
@@ -50,30 +57,22 @@ public class Ravenclaw extends Hogwarts {
     }
 
     public void setMind(int mind) {
-        if (mind < 0 || mind > 100) {
-            throw new IllegalArgumentException("Параметр может быть от 0 до 100");
-        }
+        HogwartsService.checkParametrValue("mind", mind);
         this.mind = mind;
     }
 
     public void setWisdom(int wisdom) {
-        if (wisdom < 0 || wisdom > 100) {
-            throw new IllegalArgumentException("Параметр может быть от 0 до 100");
-        }
+        HogwartsService.checkParametrValue("wisdom", wisdom);
         this.wisdom = wisdom;
     }
 
     public void setWit(int wit) {
-        if (wit < 0 || wit > 100) {
-            throw new IllegalArgumentException("Параметр может быть от 0 до 100");
-        }
+        HogwartsService.checkParametrValue("wit", wit);
         this.wit = wit;
     }
 
     public void setCreativity(int creativity) {
-        if (creativity < 0 || creativity > 100) {
-            throw new IllegalArgumentException("Параметр может быть от 0 до 100");
-        }
+        HogwartsService.checkParametrValue("creativity", creativity);
         this.creativity = creativity;
     }
 }

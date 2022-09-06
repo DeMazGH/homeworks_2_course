@@ -6,20 +6,15 @@ public class Hufflepuff extends Hogwarts {
 
     public Hufflepuff(String name, int sorcery, int transgression, int industriousness, int loyalty, int honesty) {
         super(name, sorcery, transgression);
-        if (sorcery < 0 || sorcery > 100 || transgression < 0 || transgression > 100 || industriousness < 0 ||
-                industriousness > 100 || loyalty < 0 || loyalty > 100 || honesty < 0 || honesty > 100) {
-            throw new IllegalArgumentException("Параметры могут быть от 0 до 100");
-        }
+        HogwartsService.checkParametrValue("industriousness", industriousness);
+        HogwartsService.checkParametrValue("loyalty", loyalty);
+        HogwartsService.checkParametrValue("honesty", honesty);
         this.industriousness = industriousness;
         this.loyalty = loyalty;
         this.honesty = honesty;
     }
 
     public void printStudentComparison(Hufflepuff firstStudent, Hufflepuff secondStudent) {
-        if (firstStudent == secondStudent) {
-            System.out.println("Нельзя сравнить одного и того же студента");
-            return;
-        }
         int firstStudentProperties = firstStudent.industriousness + firstStudent.loyalty + firstStudent.honesty;
         int secondStudentProperties = secondStudent.industriousness + secondStudent.loyalty + secondStudent.honesty;
         if (firstStudentProperties > secondStudentProperties) {
@@ -29,6 +24,16 @@ public class Hufflepuff extends Hogwarts {
         } else {
             System.out.println(secondStudent.getFullName() + " и " + firstStudent.getFullName() + " одинаково хороши");
         }
+    }
+
+    public void printStudentDescription(Hufflepuff hufflepuffStudent) {
+        System.out.println(hufflepuffStudent.getFullName() + " обладает качествами: ");
+        System.out.println("Сила магии - " + hufflepuffStudent.getSorcery());
+        System.out.println("Расстояние трансгрессии - " + hufflepuffStudent.getTransgression());
+        System.out.println("Трудолюбие - " + hufflepuffStudent.getIndustriousness());
+        System.out.println("Верность - " + hufflepuffStudent.getLoyalty());
+        System.out.println("Честность - " + hufflepuffStudent.getHonesty());
+        System.out.println();
     }
 
     public int getIndustriousness() {
@@ -44,23 +49,17 @@ public class Hufflepuff extends Hogwarts {
     }
 
     public void setIndustriousness(int industriousness) {
-        if (industriousness < 0 || industriousness > 100) {
-            throw new IllegalArgumentException("Параметр может быть от 0 до 100");
-        }
+        HogwartsService.checkParametrValue("industriousness", industriousness);
         this.industriousness = industriousness;
     }
 
     public void setLoyalty(int loyalty) {
-        if (loyalty < 0 || loyalty > 100) {
-            throw new IllegalArgumentException("Параметр может быть от 0 до 100");
-        }
+        HogwartsService.checkParametrValue("loyalty", loyalty);
         this.loyalty = loyalty;
     }
 
     public void setHonesty(int honesty) {
-        if (honesty < 0 || honesty > 100) {
-            throw new IllegalArgumentException("Параметр может быть от 0 до 100");
-        }
+        HogwartsService.checkParametrValue("honesty", honesty);
         this.honesty = honesty;
     }
 }
