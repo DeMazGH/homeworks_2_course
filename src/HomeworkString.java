@@ -1,7 +1,4 @@
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class HomeworkString {
 
@@ -25,5 +22,20 @@ public class HomeworkString {
         }
         uniques.removeAll(dups);
         System.out.println(String.join(" ", uniques));
+    }
+
+    public void printNumbersOfTakes(List<String> wordList) {
+        Map<String, Integer> counter = new HashMap<>();
+        for (String word : wordList) {
+            int newValue = counter.getOrDefault(word, 0) + 1;
+            counter.put(word, newValue);
+        }
+        int count = 0;
+        for (int value : counter.values()) {
+            if (value > 1) {
+                count = count + value;
+            }
+        }
+        System.out.println("Количество дублей - " + count);
     }
 }
