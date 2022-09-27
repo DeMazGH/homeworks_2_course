@@ -1,4 +1,7 @@
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class HomeworkString {
 
@@ -13,10 +16,14 @@ public class HomeworkString {
     }
 
     public void printUniqueWords(List<String> wordList) {
-
+        Set<String> uniques = new LinkedHashSet<>();
+        Set<String> dups = new HashSet<>();
         for (String word : wordList) {
-            System.out.print(word + " ");
+            if (!uniques.add(word)) {
+                dups.add(word);
+            }
         }
-        System.out.println();
+        uniques.removeAll(dups);
+        System.out.println(String.join(" ", uniques));
     }
 }
