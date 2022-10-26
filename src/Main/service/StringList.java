@@ -1,4 +1,4 @@
-package service;
+package Main.service;
 
 public interface StringList {
 

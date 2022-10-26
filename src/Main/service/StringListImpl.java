@@ -1,8 +1,8 @@
-package service;
+package Main.service;
 
-import exeption.IndexValidateException;
-import exeption.ItemNotFoundException;
-import exeption.ItemValidateException;
+import Main.exeption.ItemNotFoundException;
+import Main.exeption.ItemValidateException;
+import Main.exeption.IndexValidateException;
 
 import java.util.Arrays;
 
@@ -59,7 +59,7 @@ public class StringListImpl implements StringList {
     public String remove(String item) {
         validateItem(item);
 
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size; i++) {
             if (storage[i].equals(item)) {
                 return removeElementWithListOffset(i);
             }
@@ -77,7 +77,7 @@ public class StringListImpl implements StringList {
 
         String desired = storage[index];
         String currentCell;
-        for (int j = index + 1; j < size - 1; j++) {
+        for (int j = index + 1; j < size; j++) {
             currentCell = storage[j];
             storage[j - 1] = currentCell;
         }
@@ -95,7 +95,7 @@ public class StringListImpl implements StringList {
     public int indexOf(String item) {
         validateItem(item);
 
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size; i++) {
             if (storage[i].equals(item)) {
                 return i;
             }
@@ -129,15 +129,8 @@ public class StringListImpl implements StringList {
 
         if (size != otherList.size()) {
             return false;
-        } else {
-            for (int i = 0; i < size - 1; i++) {
-                if (!storage[i].equals(otherList.get(i))) {
-                    return false;
-                }
-            }
         }
-
-        return true;
+        return Arrays.equals(Arrays.stream(storage).toArray(), otherList.toArray());
     }
 
     @Override

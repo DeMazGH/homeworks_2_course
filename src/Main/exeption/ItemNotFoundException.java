@@ -1,4 +1,4 @@
-package exeption;
+package Main.exeption;
 
 public class ItemNotFoundException extends RuntimeException{
     public ItemNotFoundException() {

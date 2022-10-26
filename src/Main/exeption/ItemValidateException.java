@@ -1,4 +1,4 @@
-package exeption;
+package Main.exeption;
 
 public class ItemValidateException extends RuntimeException{
     public ItemValidateException() {
