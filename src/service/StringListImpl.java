@@ -86,13 +86,15 @@ public class StringListImpl implements StringList {
 
     @Override
     public String remove(int index) {
-        if (index > size - 1) {
+        if (index < 0 || index > size - 1) {
             throw new ItemNotFoundExeption("Элемент отсутствует в списке");
         }
         return removeElementWithListOffset(index);
     }
 
     private String removeElementWithListOffset(int index) {
+        validateIndex(index);
+
         String desired = storage[index];
         String currentCell;
         for (int j = index + 1; j < size - 1; j++) {
@@ -106,47 +108,93 @@ public class StringListImpl implements StringList {
 
     @Override
     public boolean contains(String item) {
+        validateItem(item);
+
+        for (int i = 0; i < size; i++) {
+            if (storage[i].equals(item)) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public int indexOf(String item) {
-        return 0;
+        validateItem(item);
+
+        for (int i = 0; i < size - 1; i++) {
+            if (storage[i].equals(item)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
     public int lastIndexOf(String item) {
-        return 0;
+        validateItem(item);
+
+        for (int i = size - 1; i >= 0; i--) {
+            if (storage[i].equals(item)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
     public String get(int index) {
-        return null;
+        if (index < 0 || index > size - 1) {
+            throw new ItemNotFoundExeption("Элемент отсутствует в списке");
+        }
+        return storage[index];
     }
 
     @Override
     public boolean equals(StringList otherList) {
-        return false;
+        if (otherList == null) {
+            throw new ItemValidateException("Элемент не может быть null");
+        }
+
+        if (size != otherList.size()) {
+            return false;
+        } else {
+            for (int i = 0; i < size - 1; i++) {
+                if (!storage[i].equals(otherList.get(i))) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
     public void clear() {
-
+        for (int i = 0; i < size - 1; i++) {
+            storage[i] = null;
+        }
+        size = 0;
     }
 
     @Override
     public String[] toArray() {
-        return new String[0];
+        if (size == 0) {
+            throw new ItemNotFoundExeption("Список пуст");
+        }
+        String[] newArray = new String[size];
+        System.arraycopy(storage, 0, newArray, 0, size - 1);
+        return newArray;
     }
 
     private void validateItem(String item) {
