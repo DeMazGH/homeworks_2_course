@@ -1,6 +1,7 @@
 package service;
 
 import exeption.IndexValidateException;
+import exeption.ItemNotFoundExeption;
 import exeption.ItemValidateException;
 
 public class StringListImpl implements StringList {
@@ -46,9 +47,8 @@ public class StringListImpl implements StringList {
 
         if (storage[index] == null) {
             add(item);
-            return storage[size -1];
+            return storage[size - 1];
         } else {
-            //переместить все элементы начиная с текущего на 1 ячейку вправо
             String previousCell = storage[index];
             String currentCell;
             for (int i = index + 1; i < storage.length; i++) {
@@ -56,7 +56,7 @@ public class StringListImpl implements StringList {
                 storage[i] = previousCell;
                 previousCell = currentCell;
             }
-            //в нужную ячейку записать item
+
             storage[index] = item;
             size++;
             return storage[index];
@@ -65,17 +65,43 @@ public class StringListImpl implements StringList {
 
     @Override
     public String set(int index, String item) {
-        return null;
+        validateItem(item);
+        validateIndex(index);
+
+        storage[index] = item;
+        return storage[index];
     }
 
     @Override
     public String remove(String item) {
-        return null;
+        validateItem(item);
+
+        for (int i = 0; i < size - 1; i++) {
+            if (storage[i].equals(item)) {
+                return removeElementWithListOffset(i);
+            }
+        }
+        throw new ItemNotFoundExeption("Элемент отсутствует в списке");
     }
 
     @Override
     public String remove(int index) {
-        return null;
+        if (index > size - 1) {
+            throw new ItemNotFoundExeption("Элемент отсутствует в списке");
+        }
+        return removeElementWithListOffset(index);
+    }
+
+    private String removeElementWithListOffset(int index) {
+        String desired = storage[index];
+        String currentCell;
+        for (int j = index + 1; j < size - 1; j++) {
+            currentCell = storage[j];
+            storage[j - 1] = currentCell;
+        }
+        storage[size - 1] = null;
+        size--;
+        return desired;
     }
 
     @Override
