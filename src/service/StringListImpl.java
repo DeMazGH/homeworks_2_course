@@ -1,8 +1,10 @@
 package service;
 
 import exeption.IndexValidateException;
-import exeption.ItemNotFoundExeption;
+import exeption.ItemNotFoundException;
 import exeption.ItemValidateException;
+
+import java.util.Arrays;
 
 public class StringListImpl implements StringList {
 
@@ -23,18 +25,8 @@ public class StringListImpl implements StringList {
         if (validateSize()) {
             expandArray();
         }
-
-        int counter = 0;
-        while (counter < storage.length) {
-            if (storage[counter] == null) {
-                storage[counter] = item;
-                size++;
-                counter++;
-                break;
-            }
-            counter++;
-        }
-        return storage[counter];
+        storage[size++] = item;
+        return storage[size - 1];
     }
 
     @Override
@@ -46,28 +38,19 @@ public class StringListImpl implements StringList {
         }
 
         if (storage[index] == null) {
-            add(item);
-            return storage[size - 1];
+            storage[index] = item;
         } else {
-            String previousCell = storage[index];
-            String currentCell;
-            for (int i = index + 1; i < storage.length; i++) {
-                currentCell = storage[i];
-                storage[i] = previousCell;
-                previousCell = currentCell;
-            }
-
+            System.arraycopy(storage, index, storage, index + 1, size - index);
             storage[index] = item;
             size++;
-            return storage[index];
         }
+        return storage[index];
     }
 
     @Override
     public String set(int index, String item) {
         validateItem(item);
         validateIndex(index);
-
         storage[index] = item;
         return storage[index];
     }
@@ -81,14 +64,11 @@ public class StringListImpl implements StringList {
                 return removeElementWithListOffset(i);
             }
         }
-        throw new ItemNotFoundExeption("Элемент отсутствует в списке");
+        throw new ItemNotFoundException("Элемент отсутствует в списке");
     }
 
     @Override
     public String remove(int index) {
-        if (index < 0 || index > size - 1) {
-            throw new ItemNotFoundExeption("Элемент отсутствует в списке");
-        }
         return removeElementWithListOffset(index);
     }
 
@@ -108,14 +88,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public boolean contains(String item) {
-        validateItem(item);
-
-        for (int i = 0; i < size; i++) {
-            if (storage[i].equals(item)) {
-                return true;
-            }
-        }
-        return false;
+        return indexOf(item) != -1;
     }
 
     @Override
@@ -144,9 +117,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public String get(int index) {
-        if (index < 0 || index > size - 1) {
-            throw new ItemNotFoundExeption("Элемент отсутствует в списке");
-        }
+        validateIndex(index);
         return storage[index];
     }
 
@@ -181,20 +152,16 @@ public class StringListImpl implements StringList {
 
     @Override
     public void clear() {
-        for (int i = 0; i < size - 1; i++) {
-            storage[i] = null;
-        }
+        storage = new String[size];
         size = 0;
     }
 
     @Override
     public String[] toArray() {
         if (size == 0) {
-            throw new ItemNotFoundExeption("Список пуст");
+            throw new ItemNotFoundException("Список пуст");
         }
-        String[] newArray = new String[size];
-        System.arraycopy(storage, 0, newArray, 0, size - 1);
-        return newArray;
+        return Arrays.copyOf(storage, size);
     }
 
     private void validateItem(String item) {
@@ -204,8 +171,8 @@ public class StringListImpl implements StringList {
     }
 
     private void validateIndex(int index) {
-        if (index < 0 || index > storage.length - 1) {
-            throw new IndexValidateException("Значение индекса выходит за пределы массива");
+        if (index < 0 || index > size - 1) {
+            throw new IndexValidateException("Значение индекса выходит за пределы коллекции");
         }
     }
 
