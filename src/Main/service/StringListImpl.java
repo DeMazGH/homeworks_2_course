@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class StringListImpl implements StringList {
 
-    private String[] storage;
+    private Integer[] storage;
     private int size;
 
     public StringListImpl() {
