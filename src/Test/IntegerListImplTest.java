@@ -217,15 +217,15 @@ class IntegerListImplTest {
 
     @Test
     void sort() {
-        out.add(77);
-        out.add(24);
-        out.add(1);
-        out.add(6);
-        out.add(33);
-        out.add(158);
-        out.add(3);
+    }
 
-        out.sortTest();
-        System.out.println(out);
+    @Test
+    void containsBinary() {
+        out.add(ITEM_1);
+        out.add(ITEM_2);
+        out.add(ITEM_3);
+
+        assertTrue(out.containsBinaryTest(2));
+        assertFalse(out.containsBinaryTest(5));
     }
 }

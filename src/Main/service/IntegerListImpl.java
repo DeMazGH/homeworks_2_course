@@ -91,6 +91,32 @@ public class IntegerListImpl implements IntegerList {
         return indexOf(item) != -1;
     }
 
+    private boolean containsBinary(Integer item) {
+        sort();
+
+        int min = 0;
+        int max = size - 1;
+
+        while (min <= max) {
+            int mid = (min + max) / 2;
+
+            if (item.equals(storage[mid])) {
+                return true;
+            }
+
+            if (item < storage[mid]) {
+                max = mid - 1;
+            } else {
+                min = mid + 1;
+            }
+        }
+        return false;
+    }
+
+    public boolean containsBinaryTest(Integer item) {
+        return containsBinary(item);
+    }
+
     @Override
     public int indexOf(Integer item) {
         validateItem(item);
