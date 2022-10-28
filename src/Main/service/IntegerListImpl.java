@@ -113,10 +113,6 @@ public class IntegerListImpl implements IntegerList {
         return false;
     }
 
-    public boolean containsBinaryTest(Integer item) {
-        return containsBinary(item);
-    }
-
     @Override
     public int indexOf(Integer item) {
         validateItem(item);

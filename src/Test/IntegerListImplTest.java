@@ -214,18 +214,4 @@ class IntegerListImplTest {
     void shouldThrowItemNotFoundExceptionInMethodToArray() {
         assertThrows(ItemNotFoundException.class, out::toArray);
     }
-
-    @Test
-    void sort() {
-    }
-
-    @Test
-    void containsBinary() {
-        out.add(ITEM_1);
-        out.add(ITEM_2);
-        out.add(ITEM_3);
-
-        assertTrue(out.containsBinaryTest(2));
-        assertFalse(out.containsBinaryTest(5));
-    }
 }
