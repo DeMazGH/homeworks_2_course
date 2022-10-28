@@ -1,8 +1,8 @@
 package Main.service;
 
+import Main.exeption.IndexValidateException;
 import Main.exeption.ItemNotFoundException;
 import Main.exeption.ItemValidateException;
-import Main.exeption.IndexValidateException;
 
 import java.util.Arrays;
 
@@ -15,23 +15,9 @@ public class IntegerListImpl implements IntegerList {
         storage = new Integer[10];
     }
 
-    public static Integer[] generateRandomArray(int arrLength) {
-        java.util.Random random = new java.util.Random();
-        Integer[] arr = new Integer[arrLength];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = random.nextInt(100_000) + 100_000;
-        }
-        return arr;
-    }
-
     public IntegerListImpl(int arrayLength) {
-        storage = generateRandomArray(arrayLength);
-        size = arrayLength;
+        storage = new Integer[arrayLength];
     }
-
-//    public IntegerListImpl(int arrayLength) {
-//        storage = new Integer[arrayLength];
-//    }
 
     @Override
     public Integer add(Integer item) {
@@ -171,46 +157,16 @@ public class IntegerListImpl implements IntegerList {
         return Arrays.copyOf(storage, size);
     }
 
-    private static void swapElements(Integer[] arr, int indexA, int indexB) {
-        int tmp = arr[indexA];
-        arr[indexA] = arr[indexB];
-        arr[indexB] = tmp;
-    }
-
     private void sort() {
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - 1 - i; j++) {
-                if (storage[j] > storage[j + 1]) {
-                    swapElements(storage, j, j + 1);
-                }
+        for (int i = 1; i < size; i++) {
+            int temp = storage[i];
+            int j = i;
+            while (j > 0 && storage[j - 1] >= temp) {
+                storage[j] = storage[j - 1];
+                j--;
             }
+            storage[j] = temp;
         }
-
-//        for (int i = 0; i < size - 1; i++) {
-//            int minElementIndex = i;
-//            for (int j = i + 1; j < size; j++) {
-//                if (storage[j] < storage[minElementIndex]) {
-//                    minElementIndex = j;
-//                }
-//            }
-//            swapElements(storage, i, minElementIndex);
-//        }
-
-//        for (int i = 1; i < size; i++) {
-//            int temp = storage[i];
-//            int j = i;
-//            while (j > 0 && storage[j - 1] >= temp) {
-//                storage[j] = storage[j - 1];
-//                j--;
-//            }
-//            storage[j] = temp;
-//        }
-
-
-    }
-
-    public void sortTest() {
-        sort();
     }
 
     private void validateItem(Integer item) {
