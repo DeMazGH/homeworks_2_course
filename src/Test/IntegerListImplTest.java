@@ -3,8 +3,8 @@ package Test;
 import Main.exeption.IndexValidateException;
 import Main.exeption.ItemNotFoundException;
 import Main.exeption.ItemValidateException;
-import Main.service.StringList;
-import Main.service.StringListImpl;
+import Main.service.IntegerList;
+import Main.service.IntegerListImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -12,9 +12,9 @@ import java.util.Arrays;
 import static Test.StringListImplTestConstants.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class StringListImplTest {
+class IntegerListImplTest {
 
-    private final StringListImpl out = new StringListImpl();
+    private final IntegerListImpl out = new IntegerListImpl();
 
     @Test
     void shouldAddAndReturnItemInMethodAdd() {
@@ -131,44 +131,44 @@ class StringListImplTest {
 
     @Test
     void shouldReturnTrueInMethodTestEquals() {
-        StringList otherStringList = new StringListImpl(3);
-        otherStringList.add(ITEM_1);
-        otherStringList.add(ITEM_2);
-        otherStringList.add(ITEM_3);
+        IntegerList otherIntegerList = new IntegerListImpl(3);
+        otherIntegerList.add(ITEM_1);
+        otherIntegerList.add(ITEM_2);
+        otherIntegerList.add(ITEM_3);
 
         out.clear();
         out.add(ITEM_1);
         out.add(ITEM_2);
         out.add(ITEM_3);
 
-        boolean actual = out.equals(otherStringList);
+        boolean actual = out.equals(otherIntegerList);
 
         assertTrue(actual);
     }
 
     @Test
     void shouldReturnFalseInMethodTestEquals() {
-        StringList otherStringList = new StringListImpl(3);
-        otherStringList.add(ITEM_1);
-        otherStringList.add(ITEM_2);
-        otherStringList.add(ITEM_3);
+        IntegerList otherIntegerList = new IntegerListImpl(3);
+        otherIntegerList.add(ITEM_1);
+        otherIntegerList.add(ITEM_2);
+        otherIntegerList.add(ITEM_3);
 
         out.clear();
         out.add(ITEM_1);
         out.add(ITEM_2);
-        boolean actual = out.equals(otherStringList);
+        boolean actual = out.equals(otherIntegerList);
         assertFalse(actual);
 
         out.add(ITEM_1);
-        actual = out.equals(otherStringList);
+        actual = out.equals(otherIntegerList);
         assertFalse(actual);
     }
 
     @Test
     void shouldThrowItemValidateExceptionInMethodTestEquals() {
-        StringList otherStringList = null;
+        IntegerList otherIntegerList = null;
         out.add(ITEM_1);
-        assertThrows(ItemValidateException.class, () -> out.equals(otherStringList));
+        assertThrows(ItemValidateException.class, () -> out.equals(otherIntegerList));
     }
 
     @Test
@@ -197,17 +197,17 @@ class StringListImplTest {
 
     @Test
     void shouldReturnStringArrayInMethodToArray() {
-        StringList otherStringList = new StringListImpl(3);
-        otherStringList.add(ITEM_1);
-        otherStringList.add(ITEM_2);
-        otherStringList.add(ITEM_3);
+        IntegerList otherIntegrList = new IntegerListImpl(3);
+        otherIntegrList.add(ITEM_1);
+        otherIntegrList.add(ITEM_2);
+        otherIntegrList.add(ITEM_3);
 
         out.add(ITEM_1);
         out.add(ITEM_2);
         out.add(ITEM_3);
-        String[] actual = out.toArray();
+        Integer[] actual = out.toArray();
 
-        assertIterableEquals(Arrays.asList(otherStringList.toArray()), Arrays.asList(Arrays.stream(actual).toArray()));
+        assertIterableEquals(Arrays.asList(otherIntegrList.toArray()), Arrays.asList(Arrays.stream(actual).toArray()));
     }
 
     @Test

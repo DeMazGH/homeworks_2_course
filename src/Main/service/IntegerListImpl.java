@@ -6,21 +6,21 @@ import Main.exeption.IndexValidateException;
 
 import java.util.Arrays;
 
-public class StringListImpl implements StringList {
+public class IntegerListImpl implements IntegerList {
 
     private Integer[] storage;
     private int size;
 
-    public StringListImpl() {
-        storage = new String[10];
+    public IntegerListImpl() {
+        storage = new Integer[10];
     }
 
-    public StringListImpl(int arrayLength) {
-        storage = new String[arrayLength];
+    public IntegerListImpl(int arrayLength) {
+        storage = new Integer[arrayLength];
     }
 
     @Override
-    public String add(String item) {
+    public Integer add(Integer item) {
         validateItem(item);
         if (validateSize()) {
             expandArray();
@@ -30,7 +30,7 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public String add(int index, String item) {
+    public Integer add(int index, Integer item) {
         validateItem(item);
         validateIndex(index);
         if (validateSize()) {
@@ -48,7 +48,7 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public String set(int index, String item) {
+    public Integer set(int index, Integer item) {
         validateItem(item);
         validateIndex(index);
         storage[index] = item;
@@ -56,7 +56,7 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public String remove(String item) {
+    public Integer remove(Integer item) {
         validateItem(item);
 
         for (int i = 0; i < size; i++) {
@@ -68,15 +68,15 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public String remove(int index) {
+    public Integer remove(int index) {
         return removeElementWithListOffset(index);
     }
 
-    private String removeElementWithListOffset(int index) {
+    private Integer removeElementWithListOffset(int index) {
         validateIndex(index);
 
-        String desired = storage[index];
-        String currentCell;
+        Integer desired = storage[index];
+        Integer currentCell;
         for (int j = index + 1; j < size; j++) {
             currentCell = storage[j];
             storage[j - 1] = currentCell;
@@ -87,12 +87,12 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public boolean contains(String item) {
+    public boolean contains(Integer item) {
         return indexOf(item) != -1;
     }
 
     @Override
-    public int indexOf(String item) {
+    public int indexOf(Integer item) {
         validateItem(item);
 
         for (int i = 0; i < size; i++) {
@@ -104,7 +104,7 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public int lastIndexOf(String item) {
+    public int lastIndexOf(Integer item) {
         validateItem(item);
 
         for (int i = size - 1; i >= 0; i--) {
@@ -116,13 +116,13 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public String get(int index) {
+    public Integer get(int index) {
         validateIndex(index);
         return storage[index];
     }
 
     @Override
-    public boolean equals(StringList otherList) {
+    public boolean equals(IntegerList otherList) {
         if (otherList == null) {
             throw new ItemValidateException("Элемент не может быть null");
         }
@@ -145,19 +145,19 @@ public class StringListImpl implements StringList {
 
     @Override
     public void clear() {
-        storage = new String[size];
+        storage = new Integer[size];
         size = 0;
     }
 
     @Override
-    public String[] toArray() {
+    public Integer[] toArray() {
         if (size == 0) {
             throw new ItemNotFoundException("Список пуст");
         }
         return Arrays.copyOf(storage, size);
     }
 
-    private void validateItem(String item) {
+    private void validateItem(Integer item) {
         if (item == null) {
             throw new ItemValidateException("Значение не может быть null");
         }
@@ -175,11 +175,11 @@ public class StringListImpl implements StringList {
 
     private void expandArray() {
         if (storage.length == 0) {
-            storage = new String[1];
+            storage = new Integer[1];
         } else {
-            String[] newStringArray = new String[storage.length * 2 - storage.length / 2];
-            System.arraycopy(storage, 0, newStringArray, 0, storage.length);
-            storage = newStringArray;
+            Integer[] newIntegerArray = new Integer[storage.length * 2 - storage.length / 2];
+            System.arraycopy(storage, 0, newIntegerArray, 0, storage.length);
+            storage = newIntegerArray;
         }
     }
 }
