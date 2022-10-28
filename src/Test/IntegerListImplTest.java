@@ -214,4 +214,18 @@ class IntegerListImplTest {
     void shouldThrowItemNotFoundExceptionInMethodToArray() {
         assertThrows(ItemNotFoundException.class, out::toArray);
     }
+
+    @Test
+    void sort() {
+        out.add(77);
+        out.add(24);
+        out.add(1);
+        out.add(6);
+        out.add(33);
+        out.add(158);
+        out.add(3);
+
+        out.sortTest();
+        System.out.println(out);
+    }
 }
