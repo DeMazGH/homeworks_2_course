@@ -23,7 +23,7 @@ public class IntegerListImpl implements IntegerList {
     public Integer add(Integer item) {
         validateItem(item);
         if (validateSize()) {
-            expandArray();
+            grow();
         }
         storage[size++] = item;
         return storage[size - 1];
@@ -34,7 +34,7 @@ public class IntegerListImpl implements IntegerList {
         validateItem(item);
         validateIndex(index);
         if (validateSize()) {
-            expandArray();
+            grow();
         }
 
         if (storage[index] == null) {
@@ -207,7 +207,7 @@ public class IntegerListImpl implements IntegerList {
         return size == storage.length;
     }
 
-    private void expandArray() {
+    private void grow() {
         if (storage.length == 0) {
             storage = new Integer[1];
         } else {
