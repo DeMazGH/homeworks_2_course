@@ -88,23 +88,37 @@ public class IntegerListImpl implements IntegerList {
 
     @Override
     public boolean contains(Integer item) {
-        return indexOf(item) != -1;
+        Integer[] storageCopy = toArray();
+        sort(storageCopy);
+        return containsBinary(storageCopy, item);
     }
 
-    private boolean containsBinary(Integer item) {
-        sort();
+    private void sort(Integer[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int temp = arr[i];
+            int j = i;
+            while (j > 0 && arr[j - 1] >= temp) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = temp;
+        }
+    }
+
+    private boolean containsBinary(Integer[] arr, Integer item) {
+        sort(arr);
 
         int min = 0;
-        int max = size - 1;
+        int max = arr.length - 1;
 
         while (min <= max) {
             int mid = (min + max) / 2;
 
-            if (item.equals(storage[mid])) {
+            if (item.equals(arr[mid])) {
                 return true;
             }
 
-            if (item < storage[mid]) {
+            if (item < arr[mid]) {
                 max = mid - 1;
             } else {
                 min = mid + 1;
@@ -177,18 +191,6 @@ public class IntegerListImpl implements IntegerList {
             throw new ItemNotFoundException("Список пуст");
         }
         return Arrays.copyOf(storage, size);
-    }
-
-    private void sort() {
-        for (int i = 1; i < size; i++) {
-            int temp = storage[i];
-            int j = i;
-            while (j > 0 && storage[j - 1] >= temp) {
-                storage[j] = storage[j - 1];
-                j--;
-            }
-            storage[j] = temp;
-        }
     }
 
     private void validateItem(Integer item) {
